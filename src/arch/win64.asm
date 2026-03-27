@@ -2,15 +2,15 @@
 
 segment .text
 
-global _find_kernel32
-global _find_function
+global _find_kernelwin64
+global _find_functionwin64
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; _find_kernel32
+; _find_kernelwin64
 ; Locates the base address of kernel32.dll via the PEB.
 ; Return: RAX = kernel32.dll base address
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-_find_kernel32:
+_find_kernelwin64:
     xor ecx, ecx
     mov rsi, [gs:0x60]          ; RSI = PEB (Process Environment Block)
     mov rsi, [rsi + 0x18]       ; RSI = PEB->Ldr
@@ -34,13 +34,13 @@ next_module:
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; _find_function
+; _find_functionwin64
 ; Resolves a function address by comparing its name hash.
 ; Input:  RCX = Module Base Address
 ;         RDX = Function Name Hash (32-bit)
 ; Return: RAX = Function Address
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-_find_function:
+_find_functionwin64:
     ; Manually save non-volatile registers (pushad does not exist in x64)
     push rbx
     push rbp
