@@ -1,0 +1,18 @@
+TARGETNAME=horus64
+TARGETTYPE=PROGRAM
+TARGETPATH=obj
+
+UMTYPE=console
+_NT_TARGET_VERSION= $(_NT_TARGET_VERSION_WIN11)
+
+USE_MSVCRT=0
+
+UMTYPE=console
+UMENTRY=main
+
+SOURCES=main.c \
+		test.c 
+
+I386_SOURCES=arch\executable\win32.asm
+I686_SOURCES=arch\executable\win64.asm
+
